@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KPG-TB Services Status</title>
+
+    <script src="//unpkg.com/alpinejs" defer></script>
+
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body x-data>
+    <header x-bind:class="$store.gs.status">
+        <div class="inner">
+            <img class="icon" x-bind:src="$store.gs.icon" />
+            <h1 x-text="$store.gs.title"></h1>
+            <p x-text="$store.update"></p>
+        </div>
+    </header>
+    <section>
+        <div class="inner">
+            <template x-for="group in $store.groups">
+                <div class="group">
+                    <div class="header item">
+                        <h3 x-text="group.name"></h3>
+                        <div class="status" x-text="group.stats"></div>
+                    </div>
+                    <template x-for="monitor in group.monitors">
+                        <div class="item monitor" x-bind:class="monitor.status">
+                            <div class="header">
+                                <img class="icon" x-bind:src="monitor.icon" />
+                                <h4 x-text="monitor.name"></h4>
+                                <div class="uptime" x-html="monitor.uptime"></div>
+                            </div>
+                            <div class="heartbeats">
+                                <template x-for="heartbeat in monitor.heartbeats">
+                                    <div class="beat" x-bind:class="heartbeat.status">
+                                        <div class="tooltip">
+                                            <div class="status">
+                                                <div>
+                                                    <img x-bind:src="heartbeat.icon" />
+                                                    <span x-text="heartbeat.header"></span>
+                                                </div>
+                                                <div x-text="heartbeat.ping"></div>
+                                            </div>
+                                            <div class="date" x-text="heartbeat.time"></div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </section>
+    <footer>
+        <div class="inner">
+            Powered by <b><a href="https://github.com/FZnachor/Uptime-Status" target="_blank">Uptime
+                    Status</a></b>.<br>Modified by <a href="https://kpgtb.eu" target="_blank"><b>KPG-TB</b></a>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
