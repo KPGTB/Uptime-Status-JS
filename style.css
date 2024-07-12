@@ -1,6 +1,5 @@
 :root {
-
-	--border-radius: .35rem;
+	--border-radius: 0.35rem;
 
 	--title-color: 255, 255, 255;
 	--text-color: 177, 177, 177;
@@ -13,16 +12,18 @@
 	--success-color: 16, 185, 129;
 	--warning-color: 255, 187, 109;
 	--maintenance-color: 149, 117, 205;
-
 }
 
 html {
 	color: rgb(var(--text-color));
 	background-color: rgb(var(--bg-color));
-	font-family: Cantarell, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	font-family: Cantarell, system-ui, -apple-system, BlinkMacSystemFont,
+		"Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+		"Helvetica Neue", sans-serif;
 }
 
-html, body {
+html,
+body {
 	overflow-x: hidden;
 	line-height: 1.15;
 	margin: 0;
@@ -39,11 +40,15 @@ html, body {
 	padding: 0 10px;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
 	color: rgb(var(--title-color));
 }
 
-h3, h4 {
+h3,
+h4 {
 	margin: 0;
 }
 
@@ -54,7 +59,6 @@ a {
 a:hover {
 	color: rgb(var(--title-color));
 }
-
 
 /* HEADER */
 
@@ -73,7 +77,11 @@ header::after {
 	left: 0;
 	width: 100%;
 	height: 450px;
-	background-image: radial-gradient(circle at 50% 0, rgb(var(--color), .2) 0, transparent 400px);
+	background-image: radial-gradient(
+		circle at 50% 0,
+		rgb(var(--color), 0.2) 0,
+		transparent 400px
+	);
 	z-index: -1;
 }
 
@@ -84,14 +92,17 @@ header .icon {
 	margin: auto;
 	position: relative;
 	display: flex;
-	background-image: linear-gradient(-45deg, rgb(var(--color), .1) 0%, rgb(var(--color), .5) 100%);
+	background-image: linear-gradient(
+		-45deg,
+		rgb(var(--color), 0.1) 0%,
+		rgb(var(--color), 0.5) 100%
+	);
 	filter: drop-shadow(0 0 10px rgb(var(--bg-color)));
 }
 
 header p {
-	font-size: .9rem;
+	font-size: 0.9rem;
 }
-
 
 /* FOOTER */
 
@@ -99,11 +110,10 @@ footer {
 	text-align: center;
 }
 
-
 /* GROUP */
 
 .group {
-	background: rgb(var(--card-bg-color), .5);
+	background: rgb(var(--card-bg-color), 0.5);
 	border: 1px solid rgb(var(--card-border-color));
 	margin: 10px 0;
 	padding: 10px;
@@ -126,9 +136,8 @@ footer {
 }
 
 .group > .header .status {
-	opacity: .7;
+	opacity: 0.7;
 }
-
 
 /* MONITOR */
 
@@ -151,10 +160,9 @@ footer {
 }
 
 .monitor .uptime {
-	font-size: .9rem;
+	font-size: 0.9rem;
 	color: rgb(var(--color));
 }
-
 
 /* HEARTBEATS */
 
@@ -201,7 +209,7 @@ footer {
 }
 
 .heartbeats .tooltip .date {
-	font-size: .9rem;
+	font-size: 0.9rem;
 	text-align: center;
 	font-weight: 700;
 	background-color: #fff1;
@@ -213,8 +221,8 @@ footer {
 	position: relative;
 	flex: 1;
 	height: 5px;
-	transition: background-color .3s, height .3s;
-	background-color: rgb(var(--color), .4);
+	transition: background-color 0.3s, height 0.3s;
+	background-color: rgb(var(--color), 0.4);
 }
 
 .heartbeats .beat:last-child {
@@ -238,7 +246,6 @@ footer {
 	background-color: rgb(var(--color));
 }
 
-
 /* STATUS COLORS */
 
 .status-0 {
@@ -255,4 +262,99 @@ footer {
 
 .status-3 {
 	--color: var(--maintenance-color);
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+	margin-inline: auto;
+	width: 60px;
+	aspect-ratio: 1;
+	color: var(--text-color);
+	border: 10px solid;
+	box-sizing: border-box;
+	border-radius: 50%;
+	animation: l6 2s infinite linear;
+	position: relative;
+}
+.loader:before {
+	content: "";
+	position: absolute;
+	height: 20px;
+	inset: auto calc(50% - 10px) 100%;
+	border-radius: 5px 5px 0 0;
+	background: linear-gradient(currentColor 0 0) top/100% 30%,
+		linear-gradient(currentColor 0 0) top/50% 100%;
+	background-repeat: no-repeat;
+}
+.loader:after {
+	content: "";
+	position: absolute;
+	inset: -8px -10px auto;
+	height: 15px;
+	background: radial-gradient(
+				farthest-side,
+				currentColor 94%,
+				rgb(var(--bg-color))
+			)
+			left,
+		radial-gradient(farthest-side, currentColor 94%, rgb(var(--bg-color)))
+			right;
+	background-size: 15px 15px;
+	background-repeat: no-repeat;
+}
+@keyframes l6 {
+	0% {
+		background: conic-gradient(
+			rgb(var(--warning-color)) 0,
+			rgb(var(--bg-color)) 0
+		);
+	}
+	12.5% {
+		background: conic-gradient(
+			rgb(var(--warning-color)) 45deg,
+			rgb(var(--bg-color)) 46deg
+		);
+	}
+	25% {
+		background: conic-gradient(
+			rgb(var(--warning-color)) 90deg,
+			rgb(var(--bg-color)) 91deg
+		);
+	}
+	37.5% {
+		background: conic-gradient(
+			rgb(var(--warning-color)) 135deg,
+			rgb(var(--bg-color)) 136deg
+		);
+	}
+	50% {
+		background: conic-gradient(
+			rgb(var(--warning-color)) 180deg,
+			rgb(var(--bg-color)) 181deg
+		);
+	}
+	62.5% {
+		background: conic-gradient(
+			rgb(var(--warning-color)) 225deg,
+			rgb(var(--bg-color)) 226deg
+		);
+	}
+	75% {
+		background: conic-gradient(
+			rgb(var(--warning-color)) 270deg,
+			rgb(var(--bg-color)) 271deg
+		);
+	}
+	87.5% {
+		background: conic-gradient(
+			rgb(var(--warning-color)) 315deg,
+			rgb(var(--bg-color)) 316deg
+		);
+	}
+	100% {
+		background: conic-gradient(
+			rgb(var(--warning-color)) 360deg,
+			rgb(var(--bg-color)) 360deg
+		);
+	}
 }

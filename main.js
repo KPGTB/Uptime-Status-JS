@@ -23,12 +23,17 @@ const statuses = {
 		title: "Under Maintenance",
 		text: "Maintenance",
 	},
+	load: {
+		status: "status-2",
+		title: "Loading Data...",
+	},
 }
 
 document.addEventListener("alpine:init", () => {
-	Alpine.store("gs", statuses[0])
+	Alpine.store("gs", statuses["load"])
 	Alpine.store("update", `Last updated on ${new Date().toLocaleString()}.`)
 	Alpine.store("groups", [])
+	Alpine.store("loader", true)
 })
 
 const monitorsUrl = kumaApiUrl + "/api/status-page/" + kumaPageName
@@ -122,6 +127,11 @@ fetch(monitorsUrl)
 					}
 				}
 
+				Alpine.store("loader", false)
 				Alpine.store("groups", groups)
 			})
+	})
+	.catch(() => {
+		Alpine.store("loader", false)
+		Alpine.store("gs", statuses[0])
 	})

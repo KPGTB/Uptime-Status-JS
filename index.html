@@ -15,7 +15,13 @@
 <body x-data>
     <header x-bind:class="$store.gs.status">
         <div class="inner">
-            <img class="icon" x-bind:src="$store.gs.icon" />
+            <template x-if="$store.loader">
+                <div class="loader"></div>
+            </template>
+            <template x-if="!$store.loader">
+                <img class="icon" x-bind:src="$store.gs.icon" />
+            </template>
+
             <h1 x-text="$store.gs.title"></h1>
             <p x-text="$store.update"></p>
         </div>
